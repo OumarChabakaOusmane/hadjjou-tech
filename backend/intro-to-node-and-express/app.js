@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 
 const studentRouter = require("./routers/studentRouter");
 const userRouter = require ("./routers/userRouter");
+const upload = require("./middlewares/multer");
 
 const app = express();
 const PORT = process.env.PORT;
@@ -24,7 +25,16 @@ app.use(express.json());
 // Routes
 
 app.use("/students", studentRouter);
-app.use("/users", userRouter);
+app.use("/auth", userRouter);
+
+app.post("/upload-file", upload.single("avatar"),  (req, res ) => {
+  console.log("file:", req.file);
+
+  res.send({
+    message:"File uploaded."
+  })
+});
+
 
 // Expose the server on the defined port
 app.listen(PORT, () => {

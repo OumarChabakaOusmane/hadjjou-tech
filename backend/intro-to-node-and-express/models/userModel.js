@@ -12,8 +12,14 @@ const userSchema = mongoose.Schema({
   password: {
     type: String,
     required: true
+  },
+  isEmailVerified: {
+    type: Boolean,
+    default: false
   }
-});
+},
+{tamestamps: true}
+);
 
 
 
